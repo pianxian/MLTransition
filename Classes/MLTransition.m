@@ -236,6 +236,20 @@ NSString * const k__MLTransition_GestureRecognizer = @"__MLTransition_GestureRec
                NSString*currentLanguage = [languages objectAtIndex:0];
                if ([currentLanguage rangeOfString:@"ar"].location != NSNotFound ||[currentLanguage rangeOfString:@"he"].location != NSNotFound  ) {
                    NSLog(@"右滑");
+                   if(velocity.x>=0) {
+                                        
+                       return NO;
+                   }
+                   CGPoint translation = [recognizer translationInView:navVC.view];
+                   translation.x = translation.x==0?0.00001f:translation.x;
+                   CGFloat ratio = (fabs(translation.y)/fabs(translation.x));
+                            //因为上滑的操作相对会比较频繁，所以角度限制少点
+                   if ((translation.y>0&&ratio>0.618f)||(translation.y<0&&ratio>0.2f)) {
+                                //NSLog(@"右滑角度不在范围内");
+                       return NO;
+                   }
+
+                   
                }else {
                    if(velocity.x<=0) {
                             
