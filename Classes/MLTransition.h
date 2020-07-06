@@ -28,9 +28,18 @@ typedef enum {
 //没有disableMLTransition的优先级高，但比较灵活的临时禁止拖返的回调
 @property (nonatomic, copy) BOOL (^disableMLTransitionBlock)();
 
-@end
 
+@end
+typedef void (^panBackAction)(void);
+
+#pragma mark - UINavigationController category interface
+@interface UINavigationController(__MLTransition)
+@property (nonatomic,copy) panBackAction backAction;
+
+
+@end
 @interface UINavigationController(DisableMLTransition)
+
 
 - (void)enabledMLTransition:(BOOL)enabled;
 

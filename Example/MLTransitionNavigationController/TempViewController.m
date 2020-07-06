@@ -32,6 +32,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.backAction = ^{
+        NSLog(@"滑动拦截");
+    };
     NSUInteger lastIndex = [self.navigationController.viewControllers indexOfObject:self]-1;
     UIColor *lastColor = nil;
     if (lastIndex<self.navigationController.viewControllers.count) {
@@ -76,6 +79,7 @@
     [label sizeToFit];
     label.backgroundColor = [UIColor yellowColor];
     self.navigationItem.titleView = label;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

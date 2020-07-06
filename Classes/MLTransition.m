@@ -149,6 +149,13 @@ NSString * const k__MLTransition_GestureRecognizer = @"__MLTransition_GestureRec
 
 @implementation UINavigationController(__MLTransition)
 
+
+-(void)setBackAction:(panBackAction)backAction{
+    objc_setAssociatedObject(self, @selector(backAction), backAction, OBJC_ASSOCIATION_COPY);
+}
+-(panBackAction)backAction{
+    return objc_getAssociatedObject(self, _cmd);
+}
 #pragma mark getter and setter
 - (void)set__MLTransition_panGestureRecognizer:(UIPanGestureRecognizer *)__MLTransition_panGestureRecognizer
 {
@@ -249,6 +256,10 @@ NSString * const k__MLTransition_GestureRecognizer = @"__MLTransition_GestureRec
                        return NO;
                    }
 
+                   if (self.backAction) {
+                       self.backAction();
+                       return NO;
+                   }
                    
                }else {
                    if(velocity.x<=0) {
@@ -262,6 +273,10 @@ NSString * const k__MLTransition_GestureRecognizer = @"__MLTransition_GestureRec
                             //因为上滑的操作相对会比较频繁，所以角度限制少点
                    if ((translation.y>0&&ratio>0.618f)||(translation.y<0&&ratio>0.2f)) {
                                 //NSLog(@"右滑角度不在范围内");
+                       return NO;
+                   }
+                   if (self.backAction) {
+                       self.backAction();
                        return NO;
                    }
                }
