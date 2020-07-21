@@ -241,7 +241,7 @@ NSString * const k__MLTransition_GestureRecognizer = @"__MLTransition_GestureRec
         CGPoint velocity = [recognizer velocityInView:navVC.view];
         NSArray*languages = [NSLocale preferredLanguages];
                NSString*currentLanguage = [languages objectAtIndex:0];
-               if ([currentLanguage rangeOfString:@"ar"].location != NSNotFound ||[currentLanguage rangeOfString:@"he"].location != NSNotFound  ) {
+               if ([currentLanguage rangeOfString:@"ar"].location != NSNotFound |[currentLanguage rangeOfString:@"he"].location != NSNotFound  ) {
                    NSLog(@"右滑");
                    if(velocity.x>=0) {
                                         
